@@ -33,6 +33,7 @@ import {
   TapGestureHandler,
   PanGestureHandlerStateChangeEvent,
   TapGestureHandlerStateChangeEvent,
+  gestureHandlerRootHOC,
 } from 'react-native-gesture-handler';
 
 import { IProps, TOpen, TClose, TStyle, IHandles, TPosition } from './options';
@@ -974,6 +975,10 @@ const ModalizeBase = (
     </View>
   );
 
+  const renderWithHOC = (child: JSX.Element) => {
+    return gestureHandlerRootHOC(() => child);
+  };
+
   const renderReactModal = (child: JSX.Element): JSX.Element => (
     <Modal
       {...reactModalProps}
@@ -983,7 +988,7 @@ const ModalizeBase = (
       visible={isVisible}
       transparent
     >
-      {child}
+      {renderWithHOC(child)}
     </Modal>
   );
 
