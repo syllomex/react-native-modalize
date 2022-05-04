@@ -988,7 +988,7 @@ const ModalizeBase = (
       visible={isVisible}
       transparent
     >
-      {renderWithHOC(child)}
+      <>{renderWithHOC(child)}</>
     </Modal>
   );
 
