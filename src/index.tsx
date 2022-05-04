@@ -56,6 +56,8 @@ const USE_NATIVE_DRIVER = true;
 const ACTIVATED = 20;
 const PAN_DURATION = 150;
 
+const ChildWithHOC = gestureHandlerRootHOC(({ children }) => <>{children}</>);
+
 const ModalizeBase = (
   {
     // Refs
@@ -975,10 +977,6 @@ const ModalizeBase = (
     </View>
   );
 
-  const renderWithHOC = (child: JSX.Element) => {
-    return gestureHandlerRootHOC(() => child);
-  };
-
   const renderReactModal = (child: JSX.Element): JSX.Element => (
     <Modal
       {...reactModalProps}
@@ -988,7 +986,7 @@ const ModalizeBase = (
       visible={isVisible}
       transparent
     >
-      <>{renderWithHOC(child)}</>
+      <ChildWithHOC>{child}</ChildWithHOC>
     </Modal>
   );
 
