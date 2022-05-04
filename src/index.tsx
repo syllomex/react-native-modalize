@@ -33,6 +33,7 @@ import {
   TapGestureHandler,
   PanGestureHandlerStateChangeEvent,
   TapGestureHandlerStateChangeEvent,
+  gestureHandlerRootHOC,
 } from 'react-native-gesture-handler';
 
 import { IProps, TOpen, TClose, TStyle, IHandles, TPosition } from './options';
@@ -45,6 +46,7 @@ import { composeRefs } from './utils/compose-refs';
 import s from './styles';
 
 const AnimatedKeyboardAvoidingView = Animated.createAnimatedComponent(KeyboardAvoidingView);
+const ChildWithHOC = gestureHandlerRootHOC(({ children }) => <>{children}</>);
 /**
  * When scrolling, it happens than beginScrollYValue is not always equal to 0 (top of the ScrollView).
  * Since we use this to trigger the swipe down gesture animation, we allow a small threshold to
@@ -983,7 +985,7 @@ const ModalizeBase = (
       visible={isVisible}
       transparent
     >
-      {child}
+      <ChildWithHOC>{child}</ChildWithHOC>
     </Modal>
   );
 
